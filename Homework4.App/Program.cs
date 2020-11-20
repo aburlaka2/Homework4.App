@@ -30,6 +30,7 @@ namespace ConsoleApp3
                 {
                     Transponention();
                 }
+                Repeat(repeat);
             } while (repeat);
             
             
@@ -196,9 +197,9 @@ namespace ConsoleApp3
                 }
             }
             Console.WriteLine("Вторая матрица будет иметь столько же столбцов, сколько строк в первой");
-            int rows2 = columns1;
-            Console.WriteLine("Введите колличество столбцов во второй матрице");
-            int columns2 = Size();
+            int columns2 = rows1;
+            Console.WriteLine("Введите колличество строк во второй матрице");
+            int rows2 = Size();
             int[,] matrix2 = new int[rows2, columns2];
             for (int i = 0; rows2 > i; i++)
             {
@@ -208,14 +209,17 @@ namespace ConsoleApp3
                     matrix2[i, j] = NumberInput();
                 }
             }
-            int rows = rows1;
-            int columns = columns2;
+            int rows = rows2;
+            int columns = columns1;
             int[,] matrixresult = new int[rows, columns];
             for (int i = 0; rows > i; i++)
             {
                 for (int j = 0; columns > j; j++)
                 {
-                    matrixresult[i, j] = matrix1[i, j] + matrix2[i, j];
+                    for (int k = 0; rows2 > k; k++)
+                    {
+                        matrixresult[i, j] = matrixresult[i, j] + matrix1[k, i] * matrix2[j, k];
+                    }
                 }
             }
             WriteMatrix(rows, columns, matrixresult);
@@ -240,13 +244,20 @@ namespace ConsoleApp3
             int rows = rows1;
             int columns = columns1;
             int[,] matrixresult = new int[rows, columns];
-            for (int i = 0; rows > i; i++)
+            for(int n=0; exponent > n; n++)
             {
-                for (int j = 0; columns > j; j++)
+                for (int i = 0; rows > i; i++)
                 {
-                    matrixresult[i, j] = matrix1[i, j] * number;
+                    for (int j = 0; columns > j; j++)
+                    {
+                        for (int k = 0; rows1 > k; k++)
+                        {
+                            matrixresult[i, j] = matrixresult[i, k] * matrix1[k, j];
+                        }
+                    }
                 }
             }
+            
             WriteMatrix(rows, columns, matrixresult);
         }
         static void Transponention()
@@ -264,16 +275,15 @@ namespace ConsoleApp3
                     matrix1[i, j] = NumberInput();
                 }
             }
-            Console.WriteLine("Введите число, на которое нужно умножить матрицу");
-            int number = NumberInput();
-            int rows = rows1;
-            int columns = columns1;
+            
+            int rows = columns1;
+            int columns = rows1;
             int[,] matrixresult = new int[rows, columns];
             for (int i = 0; rows > i; i++)
             {
                 for (int j = 0; columns > j; j++)
                 {
-                    matrixresult[i, j] = matrix1[i, j] * number;
+                    matrixresult[i, j] = matrix1[j, i];
                 }
             }
             WriteMatrix(rows, columns, matrixresult);
@@ -297,7 +307,7 @@ namespace ConsoleApp3
                 }
                 else
                 {
-                    Console.WriteLine("Ответьте 'д' или 'р'");
+                    Console.WriteLine("Ответьте 'д' или 'н'");
                     repeat2 = true;
                 }
             }
