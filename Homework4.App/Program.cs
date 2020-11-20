@@ -68,9 +68,9 @@ namespace ConsoleApp3
                 result = int.TryParse(Console.ReadLine(), out size);
                 if (result == true)
                 {
-                    if (size < 2)
+                    if (size < 1)
                     {
-                        Console.WriteLine("Нужно ввести число не меньше 2");
+                        Console.WriteLine("Нужно ввести число не меньше 1");
                         result = false;
                         continue;
                     }
